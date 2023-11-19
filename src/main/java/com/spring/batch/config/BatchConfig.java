@@ -5,6 +5,8 @@ import com.spring.batch.batch.DataReader;
 import com.spring.batch.batch.DataWriter;
 import com.spring.batch.repository.SlotCategoryRepository;
 import com.spring.batch.repository.SlotPlanRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -21,6 +23,9 @@ public class BatchConfig {
 
     private final SlotPlanRepository slotPlanRepository;
     private final SlotCategoryRepository slotCategoryRepository;
+
+    @PersistenceContext
+    private final EntityManager entityManager;
 
     @Bean
     Step readData(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
@@ -42,7 +47,7 @@ public class BatchConfig {
     Step writeData(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new StepBuilder("writeData", jobRepository)
                 .allowStartIfComplete(true)
-                .tasklet(new DataWriter(slotPlanRepository, slotCategoryRepository), transactionManager)
+                .tasklet(new DataWriter( slotCategoryRepository, entityManager), transactionManager)
                 .build();
     }
 

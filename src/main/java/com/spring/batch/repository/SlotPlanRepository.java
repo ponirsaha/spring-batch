@@ -14,14 +14,14 @@ public class SlotPlanRepository {
     private EntityManager entityManager;
 
     //@Modifying
-    public int deleteData(Integer id) {
+/*    public int deleteData(Integer id) {
         String query = "DELETE FROM slot_plan WHERE id = ?1";
         return entityManager
                 .createNativeQuery(query)
                 .setParameter(1, id)
                 .executeUpdate();
 
-    }
+    }*/
 
     public Long fetchAllRecords() {
         Query query = entityManager.createNativeQuery("SELECT count(*) FROM slot_plan");
