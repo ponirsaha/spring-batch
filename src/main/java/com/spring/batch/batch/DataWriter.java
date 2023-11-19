@@ -25,7 +25,7 @@ public class DataWriter implements Tasklet, StepExecutionListener {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
         int result = 0;
         if (slotPlans > 0) {
-            slotPlanRepository.deleteData(100);
+          result =  slotPlanRepository.deleteData(76);
         }
         slotCategoryRepository.deleteCategory(4);
         log.info("Data Writer deleted data: {} items", result);

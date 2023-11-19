@@ -4,10 +4,14 @@ spring:
     url: jdbc:mysql://localhost:3306/parking-lot
     username: root
     password: Ban@4577
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false
+
   batch:
     jdbc:
       initialize-schema: always
